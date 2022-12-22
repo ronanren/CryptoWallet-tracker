@@ -1,10 +1,8 @@
-from dotenv import load_dotenv
 import os
-import telebot, time
-load_dotenv()
+import telebot
 
-API_KEY = os.getenv('API_KEY')
-CHAT_ID = os.getenv('CHAT_ID')
+API_KEY = os.environ.get('API_KEY')
+CHAT_ID = os.environ.get('CHAT_ID')
 
 bot = telebot.TeleBot(API_KEY)
 

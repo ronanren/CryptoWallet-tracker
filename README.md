@@ -2,8 +2,17 @@
 
 Crypto wallet tracker for telegram to track new transactions, stacking rewards and others activities on your wallets.
 
-## Requirements
+## Deploy
 
 ```bash
-pip install pytelegrambotapi --upgrade
+flyctl auth login
+flyctl apps create <your-app-name>
+flyctl secrets set API_KEY=<your telegram bot token>
+flyctl secrets set CHAT_ID=<your chat id>
+flyctl deploy
+
+# stop app
+flyctl scale count 0
+# resume app
+flyctl scale count 1
 ```
