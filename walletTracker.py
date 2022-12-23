@@ -26,8 +26,18 @@ def on_open(wsapp):
 
 def on_message(wsapp, message):
     data = json.loads(message)
-    text = "New Bitcoin transaction:\n\n" + data['x']['hash'] + "\n\n" + str(data['x']['out'][0]['value']) + " satoshis" + "\n\n" + data['x']['out'][0]['addr'] + "\n\n" + "https://blockchain.info/tx/" + data['x']['hash']
-    bot.send_message(CHAT_ID, text)
+
+    text = "<b>New ₿ transaction:</b>\n\n" + "From: \n"
+    for address_from in data['x']['inputs']:
+        text += "<a href='https://bitcoinexplorer.org/address/" + address_from['prev_out']['addr'] + "'>" + address_from['prev_out']['addr'][0:5] + ".." + address_from['prev_out']['addr'][-5:] + "</a>\n" 
+    text += "\nTo: \n" 
+
+    for address_to in data['x']['out']:
+        text += "<a href='https://bitcoinexplorer.org/address/" + address_to['addr'] + "'>" + address_to['addr'][:5] + ".." + address_to['addr'][-5:] + "</a>\n" 
+
+    text += "\nValue: " + "%f" % (data['x']['inputs'][0]['prev_out']['value'] / 10**8) + " BTC" + "\n\n" + "<a href='https://bitcoinexplorer.org/tx/" + data['x']['hash'] + "'>Tx hash</a>"
+    bot.send_message(CHAT_ID, text, parse_mode='html')
+    
 
 
 def init_websocket():
