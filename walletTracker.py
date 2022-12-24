@@ -1,6 +1,7 @@
 import telebot
 import websocket
 import threading
+from pycoingecko import CoinGeckoAPI
 import time, datetime
 import os
 import json
@@ -9,8 +10,9 @@ API_KEY = os.environ.get('API_KEY')
 CHAT_ID = os.environ.get('CHAT_ID')
 
 bot = telebot.TeleBot(API_KEY)
+cg = CoinGeckoAPI()
 
-@bot.message_handler(commands=['commands', 'help'])
+@bot.message_handler(commands=['start', 'commands', 'help'])
 def send_welcome(message):
     bot.send_message(message.chat.id, "Commands:\n\n/commands\n/help")
     # print(message.chat.id)
@@ -26,10 +28,11 @@ def on_open(wsapp):
 
 def on_message(wsapp, message):
     data = json.loads(message)
+    bitcoin_price = cg.get_price(ids='bitcoin', vs_currencies='usd')['bitcoin']['usd']
 
     text = "<b>New ₿ transaction:</b>\n\n" + "From: \n"
     for address_from in data['x']['inputs']:
-        text += "<a href='https://bitcoinexplorer.org/address/" + address_from['prev_out']['addr'] + "'>" + address_from['prev_out']['addr'][0:5] + ".." + address_from['prev_out']['addr'][-5:] + "</a>\n" 
+        text += "<a href='https://bitcoinexplorer.org/address/" + address_from['prev_out']['addr'] + "'>" + address_from['prev_out']['addr'][0:5] + ".." + address_from['prev_out']['addr'][-5:] + "</a> (" + "%f" % (address_from['prev_out']['value'] / 10**8) + "₿ ≈ " + "%.2f" % (bitcoin_price * (address_from['prev_out']['value'] / 10**8)) + "$)\n" 
     text += "\nTo: \n" 
 
     for address_to in data['x']['out']:
