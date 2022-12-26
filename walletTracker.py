@@ -5,6 +5,7 @@ from pycoingecko import CoinGeckoAPI
 import time, datetime
 import os
 import json
+from API.egld import *
 
 API_KEY = os.environ.get('API_KEY')
 CHAT_ID = os.environ.get('CHAT_ID')
@@ -16,16 +17,27 @@ cg = CoinGeckoAPI()
 
 @bot.message_handler(commands=['start', 'commands', 'help'])
 def send_welcome(message):
-    bot.send_message(message.chat.id, "Commands:\n\n/commands\n/help")
+    bot.send_message(message.chat.id, "<b>Commands:</b>\n\nBitcoin (₿)\n/btc\n\nElrond (EGLD)\n/egld\n/egld_delegation", parse_mode='html')
     # print(message.chat.id)
 
+# EGLD commands 
+
+@bot.message_handler(commands=['egld'])
+def message_EGLD(message):
+    bot.send_message(message.chat.id, get_economics_egld(), parse_mode='html')
+
+@bot.message_handler(commands=['egld_delegation'])
+def message_EGLD(message):
+    bot.send_message(message.chat.id, get_account_delegation_egld(ELROND), parse_mode='html')
+
+
+# Track new events every minute
 def track_wallet():
     while 1:
-        if (int(datetime.datetime.now().strftime("%S")) % 60 == 0):
-            # bot.send_message(CHAT_ID, datetime.datetime.now().strftime("%H:%M:%S"))
-            pass
-        time.sleep(1)
+        
+        time.sleep(60)
 
+# Bitcoin tracker
 def on_open_btc(wsapp):
     wsapp.send(json.dumps({"op": "addr_sub", "addr": BTC}))
 
@@ -55,7 +67,6 @@ def init_websocket():
     ws_btc = websocket.WebSocketApp("wss://ws.blockchain.info/inv", on_message=on_message_btc, on_open=on_open_btc)
     ws_btc.run_forever()
 
-    # Ethereum tracker
     
 
 track_wallet_thread = threading.Thread(target=track_wallet)

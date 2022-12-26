@@ -17,6 +17,7 @@ flyctl secrets set API_KEY=<your telegram bot token>
 flyctl secrets set CHAT_ID=<your chat id>
 flyctl secrets set BTC=<your BTC address>
 flyctl secrets set ETH=<your ETH address>
+flyctl secrets set ELROND=<your ELROND address>
 flyctl deploy
 
 # stop app
