@@ -3,18 +3,22 @@ from pycoingecko import CoinGeckoAPI
 cg = CoinGeckoAPI()
 
 def get_economics_btc():
-    bitcoin_info = cg.get_coin_by_id(id='bitcoin', localization=False, tickers=False, market_data=True, community_data=False, developer_data=False, sparkline=False)
-    message = "<b>Bitcoin Economics:</b>\n\n" + \
-              "Price: <code>$" + "%.2f" % bitcoin_info['market_data']['current_price']['usd']  + \
-              "</code>\nMarket Cap change 24h: <code>" + "%.2f" % bitcoin_info['market_data']['market_cap_change_percentage_24h'] + "%</code>\n\n" + \
-              "24h High: <code>$" + "%.2f" % bitcoin_info['market_data']['high_24h']['usd'] + \
-              "</code>\n24h Low: <code>$" + "%.2f" % bitcoin_info['market_data']['low_24h']['usd'] + \
-              "</code>\n24h Change: <code>" + "%.2f" % bitcoin_info['market_data']['price_change_percentage_24h'] + "%</code>\n\n" + \
-              "7d Change: <code>" + "%.2f" % bitcoin_info['market_data']['price_change_percentage_7d'] + "%</code>\n" + \
-              "30d Change: <code>" + "%.2f" % bitcoin_info['market_data']['price_change_percentage_30d'] + "%</code>\n" + \
-              "1y Change: <code>" + "%.2f" % bitcoin_info['market_data']['price_change_percentage_1y'] + "%</code>\n\n" + \
-              "All Time High: <code>$" + "%.2f" % bitcoin_info['market_data']['ath']['usd'] + \
-              "</code>\nAll Time High Percentage: <code>" + "%.2f" % bitcoin_info['market_data']['ath_change_percentage']['usd'] + "%</code>\n\n" 
+    try:
+        bitcoin_info = cg.get_coin_by_id(id='bitcoin', localization=False, tickers=False, market_data=True, community_data=False, developer_data=False, sparkline=False)
+        message = "<b>Bitcoin Economics:</b>\n\n" + \
+                "Price: <code>$" + "%.2f" % bitcoin_info['market_data']['current_price']['usd']  + \
+                "</code>\nMarket Cap change 24h: <code>" + "%.2f" % bitcoin_info['market_data']['market_cap_change_percentage_24h'] + "%</code>\n\n" + \
+                "24h High: <code>$" + "%.2f" % bitcoin_info['market_data']['high_24h']['usd'] + \
+                "</code>\n24h Low: <code>$" + "%.2f" % bitcoin_info['market_data']['low_24h']['usd'] + \
+                "</code>\n24h Change: <code>" + "%.2f" % bitcoin_info['market_data']['price_change_percentage_24h'] + "%</code>\n\n" + \
+                "7d Change: <code>" + "%.2f" % bitcoin_info['market_data']['price_change_percentage_7d'] + "%</code>\n" + \
+                "30d Change: <code>" + "%.2f" % bitcoin_info['market_data']['price_change_percentage_30d'] + "%</code>\n" + \
+                "1y Change: <code>" + "%.2f" % bitcoin_info['market_data']['price_change_percentage_1y'] + "%</code>\n\n" + \
+                "All Time High: <code>$" + "%.2f" % bitcoin_info['market_data']['ath']['usd'] + \
+                "</code>\nAll Time High Percentage: <code>" + "%.2f" % bitcoin_info['market_data']['ath_change_percentage']['usd'] + "%</code>\n\n" 
+    except Exception as e:
+        print("get_economics_btc exception : " + e)
+        message = "Error to get btc economics"
     return message
 
 def get_on_message_btc(data):
