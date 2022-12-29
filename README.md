@@ -10,6 +10,7 @@ python walletTracker.py
 
 ## Deploy
 
+You can use flyctl or ~/.fly/bin/flyctl depending on your installation
 ```bash
 flyctl auth login
 flyctl apps create <your-app-name>
