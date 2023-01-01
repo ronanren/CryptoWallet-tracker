@@ -38,7 +38,8 @@ def message_EGLD_Delegation(message):
 # Track new events every minute
 def track_wallet():
     while 1:
-        check_new_elrond_transaction(ELROND, bot, CHAT_ID)
+        # check_new_elrond_transaction(ELROND, bot, CHAT_ID)
+        print(time.strftime("%d/%m/%Y %H:%M:%S"))
         time.sleep(60)
 
 # Bitcoin tracker
