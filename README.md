@@ -6,19 +6,19 @@ Crypto wallet tracker for telegram to track stacking rewards on your wallets and
 
 - /help or /commands or /start - show available commands
 
-<img src="https://raw.githubusercontent.com/ronanren/CryptoWallet-tracker/main/images/commands.jpg" width="150px">
+<img src="https://raw.githubusercontent.com/ronanren/CryptoWallet-tracker/main/images/commands.png" width="150px">
 
 - /btc_economics - show BTC economics
 
-<img src="https://raw.githubusercontent.com/ronanren/CryptoWallet-tracker/main/images/btc_economics.jpg" width="250px">
+<img src="https://raw.githubusercontent.com/ronanren/CryptoWallet-tracker/main/images/btc_economics.png" width="250px">
 
 - /egld_economics - show EGLD economics
 
-<img src="https://raw.githubusercontent.com/ronanren/CryptoWallet-tracker/main/images/egld_economics.jpg" width="250px">
+<img src="https://raw.githubusercontent.com/ronanren/CryptoWallet-tracker/main/images/egld_economics.png" width="250px">
 
 - /egld_delegation - show EGLD delegation
 
-<img src="https://raw.githubusercontent.com/ronanren/CryptoWallet-tracker/main/images/egld_delegation.jpg" width="250px">
+<img src="https://raw.githubusercontent.com/ronanren/CryptoWallet-tracker/main/images/egld_delegation.png" width="250px">
 
 ## Development 
 
