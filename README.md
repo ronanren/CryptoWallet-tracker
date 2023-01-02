@@ -1,6 +1,6 @@
 # CryptoWallet-tracker
 
-Crypto wallet tracker for telegram to track new transactions, stacking rewards and others activities on your wallets.
+Crypto wallet tracker for telegram to track stacking rewards on your wallets and get crypto economics.
 
 ## Usage commands
 
