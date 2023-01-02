@@ -10,7 +10,6 @@ from API.btc import *
 API_KEY = os.environ.get('API_KEY')
 CHAT_ID = os.environ.get('CHAT_ID')
 BTC = os.environ.get("BTC")
-ETH = os.environ.get("ETH")
 ELROND = os.environ.get("ELROND")
 
 bot = telebot.TeleBot(API_KEY)
